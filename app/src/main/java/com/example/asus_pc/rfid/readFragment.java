@@ -4,17 +4,23 @@ package com.example.asus_pc.rfid;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 import uhf.api.CommandType;
 import uhf.api.Query_epc;
 import uhf.api.ShareData;
 
 public class readFragment extends Fragment {
+    private ArrayList<String> countAr = new ArrayList<>();
+    private ArrayList<String> epcIDAr = new ArrayList<>();
 
     private Button readBT;
     @Nullable
@@ -34,7 +40,10 @@ public class readFragment extends Fragment {
 
                 String data = OutOneData();
                 if(data!=null) {
-                    Toast.makeText(getActivity(), data, Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getActivity(), data, Toast.LENGTH_SHORT).show();
+                    countAr.add("1");
+                    epcIDAr.add(data);
+                    initRecyclerView();
                 }
 
 
@@ -57,6 +66,12 @@ public class readFragment extends Fragment {
             }
         }
         return null;
+    }
+    private void initRecyclerView() {
+        RecyclerView rw = (RecyclerView) getActivity().findViewById(R.id.recycler_view);
+        RecyclerAdapter adapter = new RecyclerAdapter(getActivity(),countAr,epcIDAr);
+        rw.setAdapter(adapter);
+        rw.setLayoutManager(new LinearLayoutManager(getContext()));
     }
 
 }
