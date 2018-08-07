@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "940432931019",
+    "firebase_url": "https://rfid-3ca39.firebaseio.com",
+    "project_id": "rfid-3ca39",
+    "storage_bucket": "rfid-3ca39.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:940432931019:android:bb4316c299789615",
+        "android_client_info": {
+          "package_name": "com.example.asus_pc.rfid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "940432931019-82182d1qoh8fabve9ecqg68jqvhe1d1o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.asus_pc.rfid",
+            "certificate_hash": "5c8511b60e390ed74806b376f77fd5df96a241cf"
+          }
+        },
+        {
+          "client_id": "940432931019-ocrsb7uv49q13uhha2ig9dlcd2s987fa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLYHFCoSq0PEF2Rjp7IhA2XeLmOegk9Yk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "940432931019-ocrsb7uv49q13uhha2ig9dlcd2s987fa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
