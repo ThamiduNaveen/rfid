@@ -23,10 +23,11 @@ public class readFragment extends Fragment {
     private ArrayList<String> epcIDAr = new ArrayList<>();
 
     private Button readBT;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.frag_read,container,false);
+        return inflater.inflate(R.layout.frag_read, container, false);
     }
 
     @Override
@@ -39,37 +40,42 @@ public class readFragment extends Fragment {
             public void onClick(View view) {
 
                 String data = OutOneData();
-                if(data!=null) {
+                if (data != null) {
                     //Toast.makeText(getActivity(), data, Toast.LENGTH_SHORT).show();
-                    countAr.add("1");
-                    epcIDAr.add(data);
-                    initRecyclerView();
-                }
-
-
+                    if(epcIDAr.indexOf(data)==-1){
+                        countAr.add("1");
+                        epcIDAr.add(data);
+                    }else{
+                        int pos = Integer.parseInt(countAr.get(epcIDAr.indexOf(data)))+1;
+                        countAr.set(epcIDAr.indexOf(data),String.valueOf(pos));
+                    }
+                initRecyclerView();
             }
-        });
-    }
+
+        }
+    });
+}
 
     private String OutOneData() {
-        Query_epc mQuery_epc=new Query_epc();
-        UHFClient info=UHFClient.getInstance();
-        if(info!=null) {
+        Query_epc mQuery_epc = new Query_epc();
+        UHFClient info = UHFClient.getInstance();
+        if (info != null) {
 
-            Boolean ret=UHFClient.mUHF.command(CommandType.SINGLE_QUERY_TAGS_EPC, mQuery_epc);
-            if(ret) {
+            Boolean ret = UHFClient.mUHF.command(CommandType.SINGLE_QUERY_TAGS_EPC, mQuery_epc);
+            if (ret) {
 
-                String str_tmp= ShareData.CharToString(mQuery_epc.epc.epc, mQuery_epc.epc.epc.length);
-                str_tmp=str_tmp.replace(" ", "");
+                String str_tmp = ShareData.CharToString(mQuery_epc.epc.epc, mQuery_epc.epc.epc.length);
+                str_tmp = str_tmp.replace(" ", "");
                 return str_tmp;
 
             }
         }
         return null;
     }
+
     private void initRecyclerView() {
         RecyclerView rw = (RecyclerView) getActivity().findViewById(R.id.recycler_view);
-        RecyclerAdapter adapter = new RecyclerAdapter(getActivity(),countAr,epcIDAr);
+        RecyclerAdapter adapter = new RecyclerAdapter(getActivity(), readFragment.this, countAr, epcIDAr);
         rw.setAdapter(adapter);
         rw.setLayoutManager(new LinearLayoutManager(getContext()));
     }

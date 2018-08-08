@@ -1,6 +1,7 @@
 package com.example.asus_pc.rfid;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -18,11 +19,13 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.viewHo
     private ArrayList<String> countAr = new ArrayList<>();
     private ArrayList<String> epcIDAr = new ArrayList<>();
     private Context mContext;
+    private readFragment rf;
 
-    public RecyclerAdapter( Context mContext,ArrayList<String> countAr, ArrayList<String> epcIDAr) {
+    public RecyclerAdapter( Context mContext,readFragment rf,ArrayList<String> countAr, ArrayList<String> epcIDAr) {
         this.countAr = countAr;
         this.epcIDAr = epcIDAr;
         this.mContext = mContext;
+        this.rf=rf;
     }
 
     @NonNull
@@ -42,7 +45,9 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.viewHo
             @Override
             public void onClick(View view) {
                 Log.d(TAG,"on Clicke clickedOn :" +epcIDAr.get(position));
-                Toast.makeText(mContext, epcIDAr.get(position), Toast.LENGTH_SHORT).show();
+                Intent main_idDetails = new Intent(mContext,idDetailsActivity.class);
+                main_idDetails.putExtra("id_detect", epcIDAr.get(position));
+                rf.startActivity(main_idDetails);
             }
         });
     }
